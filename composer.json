@@ -1,0 +1,9 @@
+{
+    "name": "otmakhov/timur",
+    "require": {
+        "smarty/smarty": "2.6.*"
+    },
+    "autoload": {
+        "psr-4": {"App\\": "App/"}
+    }
+}
