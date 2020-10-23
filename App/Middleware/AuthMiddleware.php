@@ -2,7 +2,7 @@
 
 namespace App\Middleware;
 
-use App\Data\User\UserRepository;
+use App\Data\User\UserRepositoryOld;
 use App\Data\User\UserService;
 use App\DI\Container;
 use App\Http\Request;
@@ -19,12 +19,12 @@ class AuthMiddleware implements IMiddleware
 
     /**
      * AuthMiddleware constructor.
-     * @param UserRepository $userRepository
+     * @param UserRepositoryOld $userRepository
      * @param Request $request
      * @param Container $di
      */
     public function __construct(
-        UserRepository $userRepository,
+        UserRepositoryOld $userRepository,
         Request $request,
         Container $di,
         UserService $userService

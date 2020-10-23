@@ -44,26 +44,28 @@ class OrderItemModel extends AbstractModel
      */
     protected $productData;
 
+//  * @Model\TableField("order_id")
     /**
      * @var OrderModel
-     * @Model\TableField("order_id")
      */
     protected $order;
 
 
-
-    public function __construct(int $amount, ProductModel $productModel, OrderModel $order)
+//    public function __construct(int $amount, ProductModel $productModel, OrderModel $order)
+    public function __construct()
     {
-        $this->amount = $amount;
-        $this->totalSum = $amount * $productModel->getPrice();
-        $this->order = $order;
-        $this->product = $productModel->getId_product();
-        $this->productData = [
-            'name' => $productModel->getName_product(),
-            'price' => $productModel->getPrice(),
-            'article' => $productModel->getArticle(),
-        ];
+//        $this->amount = $amount;
+//        $this->totalSum = $amount * $productModel->getPrice();
+//        $this->order = $order;
+//        $this->product = $productModel->getId_product();
+//        $this->productData = [
+//            'name' => $productModel->getName_product(),
+//            'price' => $productModel->getPrice(),
+//            'article' => $productModel->getArticle(),
+//        ];
     }
+
+    
 
     /**
      * @return int
@@ -77,4 +79,13 @@ class OrderItemModel extends AbstractModel
     {
         return $this->totalSum;
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 }

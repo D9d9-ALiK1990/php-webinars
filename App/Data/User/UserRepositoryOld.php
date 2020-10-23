@@ -7,7 +7,7 @@ use App\Db\Db;
 use Exception;
 
 
-class UserRepository
+class UserRepositoryOld
 {
     /**
      * @var \App\Data\User\UserService
@@ -27,7 +27,7 @@ class UserRepository
      */
     public function getById(int $id_user)
     {
-        $query = "SELECT u.* FROM users u WHERE u.id_user = $id_user";
+        $query = "SELECT u.* FROM users u WHERE u.id = $id_user";
         $userArray = Db::fetchRow($query);
 
         return $this->fromArray($userArray);
@@ -37,7 +37,7 @@ class UserRepository
         $id = $user->getId();
         $arrayData = $this->toArray($user);
         if ($id) {
-            Db::update('users', $arrayData, "id_user = $id");
+            Db::update('users', $arrayData, "id = $id");
             return $user;
         }
 
@@ -48,13 +48,13 @@ class UserRepository
     }
 
     public function fromArray(array $data): UserModel {
-        $id_user = $data['id_user'];
+        $id = $data['id'];
 
-        $name_user = $data['name_user'] ?? null;
+        $name = $data['name'] ?? null;
         $email = $data['email'] ?? null;
         $password = $data['password'] ?? null;
 
-        if (is_null($name_user)) {
+        if (is_null($name)) {
             throw new Exception('Имя пользователя для инициализации модели обязательно');
         }
         if (is_null($email)) {
@@ -64,16 +64,16 @@ class UserRepository
             throw new Exception('Пароль для инициализации модели обязательно');
         }
 
-        $user = new UserModel($name_user, $email, $password);
+        $user = new UserModel($name, $email, $password);
 
-        $user->setId($id_user);
+        $user->setId($id);
 
         return $user;
     }
 
     public function toArray(UserModel $user) {
         $data = [
-            'name_user' => $user->getName(),
+            'name' => $user->getName(),
             'email' => $user->getEmail(),
             'password' => $user->getPassword(),
         ];

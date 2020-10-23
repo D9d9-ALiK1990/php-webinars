@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Config\Config;
-use App\Data\User\UserRepository;
+use App\Data\User\UserRepositoryOld;
 use App\DI\Container;
 use App\Middleware\IMiddleware;
 use App\Renderer\Renderer;

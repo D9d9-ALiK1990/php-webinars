@@ -16,10 +16,10 @@ class UserController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserRepository $userRepository
+     * @param UserRepositoryOld $userRepository
      * @route("/user/auth")
      */
-    public function auth(Request $request, UserRepository $userRepository)
+    public function auth(Request $request, UserRepositoryOld $userRepository)
     {
         $data = [];
         if ($request->isPost()) {
@@ -27,7 +27,7 @@ class UserController extends AbstractController
             try {
                 $user = $this->authAction($userRepository);
 
-                $_SESSION['id_user'] = $user->getId();
+                $_SESSION['id'] = $user->getId();
 
                 return $this->redirect('/user/auth');
             } catch (EmptyFieldsException $e) {
@@ -51,7 +51,7 @@ class UserController extends AbstractController
     /**
      * @route("/user/register")
      */
-    public function register(Request $request, UserRepository $userRepository, UserService $userService)
+    public function register(Request $request, UserRepositoryOld $userRepository, UserService $userService)
     {
         $data = [];
  //       echo "<pre>"; var_dump($request); echo "</pre>";
@@ -127,12 +127,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param UserRepository $userRepository
+     * @param UserRepositoryOld $userRepository
      * @return UserModel|null
      * @throws EmptyFieldsException
      * @throws PasswordMismathException
      */
-    private function authAction(UserRepository $userRepository): ?UserModel
+    private function authAction(UserRepositoryOld $userRepository): ?UserModel
     {
         $email = $this->request->getStrFromPost('email');
         $password = $this->request->getStrFromPost('password');

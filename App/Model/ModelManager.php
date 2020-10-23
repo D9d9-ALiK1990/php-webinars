@@ -33,6 +33,11 @@ class ModelManager
         $this->modelAnalyzer = $modelAnalyzer;
     }
 
+    /**
+     * @param AbstractModel $model
+     * @return bool
+     * @throws ManyModelIdFieldExeption
+     */
     public function save(Model $model)
     {
         $tableName = $this->modelAnalyzer->getTableName($model);
@@ -67,6 +72,7 @@ class ModelManager
             }
         }
 
+ //       dump($model);
         $id = $model->getId();
         $modelIdInfo = $this->modelAnalyzer->getIdField($model);
 
@@ -76,10 +82,10 @@ class ModelManager
 
         if ($id) {
             $id = Db::insert($tableName, $tableData);
-            $this->reflectionUtil->setPrivateValue($model, $modelIdInfo['objectProperty'], $id);
+            $this->modelAnalyzer->setId($model, $id);
         }
         else {
-            Db::update($tableName, $tableData, $modelIdInfo['tableProperty'] . " = '$id");
+            Db::update($tableName, $tableData, $modelIdInfo['tableProperty'] . " = '$id'");
         }
 
         return true;

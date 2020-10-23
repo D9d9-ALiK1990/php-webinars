@@ -8,7 +8,7 @@ use App\Data\Folder\FolderModel;
 use App\Data\Product\ProductModel;
 use App\Data\Product\ProductImageService as ProductImageService;
 
-class ProductRepository {
+class ProductRepositoryOld {
     
     public function get_Spisok_Count(){
         $query='SELECT COUNT(*) AS c FROM products p LEFT JOIN folders f ON p.id_folder = f.id_folder';

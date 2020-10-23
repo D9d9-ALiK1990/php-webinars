@@ -3,36 +3,49 @@
 namespace App\Data\Product;
 
 use App\Data\Folder\FolderModel;
+use App\Model\AbstractModel;
 
-class ProductModel {
+/**
+ * Class ProductModel
+ * @package App\Data\Product
+ *
+ * @Model\Table("products")
+ */
+class ProductModel extends AbstractModel {
     
     /**
      * @var int
+     * @Model\Id
      */
-    protected $id_product = 0;
+    protected $id = 0;
     
     /**
      * @var string
+     * @Model\TableField
      */
     protected $name_product;
     
     /**
      * @var string
+     * @Model\TableField
      */
     protected $article = '';
     
     /**
      * @var int
+     * @Model\TableField
      */
     protected $amount;
     
     /**
      * @var float
+     * @Model\TableField
      */
     protected $price;
     
     /**
      * @var string
+     * @Model\TableField
      */
     protected $description = '';
     
@@ -46,27 +59,28 @@ class ProductModel {
      */
     protected $images = [];
     
-    public function __construct(string $name_product, float $price, int $amount) {
-        $this->setName_product($name_product);
-        $this->setPrice($price);
-        $this->setAmount($amount);        
+    //public function __construct(string $name_product, float $price, int $amount)
+    public function __construct()
+    {
+//        $this->setName_product($name_product);
+//        $this->setPrice($price);
+//        $this->setAmount($amount);
     }
-    
+
     /**
-     * 
      * @return int
      */
-    public function getId_product() {
-        return $this->id_product;    
+    public function getId(): int {
+        return $this->id;
     }
     
     /**
      * 
-     * @param int $id_product
+     * @param int $id
      * @return $this
      */
-    public function setId_product(int $id_product) {
-        $this->id_product=$id_product;
+    public function setId(int $id) {
+        $this->id = $id;
         return $this;
     }
     /**

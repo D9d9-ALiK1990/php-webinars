@@ -4,7 +4,7 @@ namespace App\Data\Product;
 
 use App\Http\Request;
 //use App\Product\ProductService;
-use App\Data\Product\ProductRepository;
+use App\Data\Product\ProductRepositoryOld;
 use App\Http\Response;
 use App\Renderer\Renderer;
 use App\Data\FolderService;
@@ -29,11 +29,11 @@ class ProductController extends AbstractController{
     /**
      * 
      * @param Request $request
-     * @param ProductRepository $productRepository
+     * @param ProductRepositoryOld $productRepository
      * 
      * @route("/product_list")
      */
-    public function list(Request $request, ProductRepository $productRepository) {
+    public function list(Request $request, ProductRepositoryOld $productRepository) {
         
 //        $request = new Request();
         $current_page = $request->getIntFromGet('p', 1);
@@ -44,7 +44,7 @@ class ProductController extends AbstractController{
         $products_count = $productRepository->get_Spisok_Count();
         $pagesCount = ceil($products_count / $limit);
 
-    //    $productRepository = new ProductRepository();
+    //    $productRepository = new ProductRepositoryOld();
         $products = $productRepository->get_Spisok($limit, $offset);
         
     return $this->render('products/products.tpl', [
@@ -57,8 +57,8 @@ class ProductController extends AbstractController{
 //        Renderer::getSmarty()->display('products/products.tpl');
     }
     
-    public function upd(Request $request, ProductRepository $productRepository, ProductService $productService, 
-    ProductImageService $productImageService, Response $response, FolderService $folderService) {
+    public function upd(Request $request, ProductRepositoryOld $productRepository, ProductService $productService,
+                        ProductImageService $productImageService, Response $response, FolderService $folderService) {
         
         $id_product = $request->getIntFromGet('id_product', null);
         if (is_null($id_product)) {
@@ -66,7 +66,7 @@ class ProductController extends AbstractController{
         }
         $product = [];
 
-//        $productRepository = new Product\ProductRepository();
+//        $productRepository = new Product\ProductRepositoryOld();
 
         if ($id_product) {
             $product = $productRepository->getById($id_product);    
@@ -125,12 +125,12 @@ class ProductController extends AbstractController{
 //        Renderer::getSmarty()->display('products/upd.tpl');
     }
     
-    public function add(Request $request, ProductRepository $productRepository, ProductService $productService, 
-    ProductImageService $productImageService, Response $response, FolderService $folderService) {
+    public function add(Request $request, ProductRepositoryOld $productRepository, ProductService $productService,
+                        ProductImageService $productImageService, Response $response, FolderService $folderService) {
         
         if ($request->isPost())   {
         $productData = $productService->getDataFromPost($request);
-//        $productRepository = new Product\ProductRepository();
+//        $productRepository = new Product\ProductRepositoryOld();
         $product = $productRepository->getProductFromArray($productData);
         //echo var_dump($product);
         //exit;

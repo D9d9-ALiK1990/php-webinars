@@ -39,6 +39,12 @@ class OrderModel extends AbstractModel
      */
     protected $user;
 
+    /**
+     * @var OrderItemModel[]
+     * @Model\Relation("order_id")
+     */
+    protected $items;
+
 
     public function __construct()
     {
